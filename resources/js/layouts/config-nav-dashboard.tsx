@@ -1,7 +1,4 @@
-import { Label } from 'src/components/label';
-import { SvgColor } from 'src/components/svg-color';
-
-// ----------------------------------------------------------------------
+import { SvgColor } from '../components/svg-color';
 
 const icon = (name: string) => (
   <SvgColor width="100%" height="100%" src={`/assets/icons/navbar/${name}.svg`} />
@@ -13,20 +10,15 @@ export const navData = [
     path: '/',
     icon: icon('ic-analytics'),
   },
+  // {
+  //   title: 'User',
+  //   path: '/user',
+  //   icon: icon('ic-user'),
+  // },
   {
-    title: 'User',
-    path: '/user',
+    title: 'Search User',
+    path: '/user-search',
     icon: icon('ic-user'),
-  },
-  {
-    title: 'Product',
-    path: '/products',
-    icon: icon('ic-cart'),
-    info: (
-      <Label color="error" variant="inverted">
-        +3
-      </Label>
-    ),
   },
   {
     title: 'Blog',

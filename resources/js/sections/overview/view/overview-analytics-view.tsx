@@ -1,8 +1,8 @@
 import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
 
-import { _tasks, _posts, _timeline } from 'src/_mock';
-import { DashboardContent } from 'src/layouts/dashboard';
+import { _tasks, _posts, _timeline } from '../../../_mock';
+import { DashboardContent } from '../../../layouts/dashboard';
 
 import { AnalyticsNews } from '../analytics-news';
 import { AnalyticsTasks } from '../analytics-tasks';

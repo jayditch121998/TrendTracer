@@ -1,21 +1,19 @@
-import { useState, useCallback } from 'react';
-
+import { useState, useCallback, useEffect } from 'react';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Unstable_Grid2';
+import Grid from '@mui/material/Grid';
 import Pagination from '@mui/material/Pagination';
 import Typography from '@mui/material/Typography';
-
-import { _products } from 'src/_mock';
-import { DashboardContent } from 'src/layouts/dashboard';
-
-import { ProductItem } from '../product-item';
+import TextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
+import SearchIcon from '@mui/icons-material/Search';
+import axios from 'axios';
+import { _products } from '../../../_mock';
+import { DashboardContent } from '../../../layouts/dashboard';
+import { UserMediaItem } from '../user-medias';
+import { UserItem } from '../user-items';
 import { ProductSort } from '../product-sort';
 import { CartIcon } from '../product-cart-widget';
-import { ProductFilters } from '../product-filters';
-
 import type { FiltersProps } from '../product-filters';
-
-// ----------------------------------------------------------------------
 
 const GENDER_OPTIONS = [
   { value: 'men', label: 'Men' },
@@ -57,12 +55,43 @@ const defaultFilters = {
   category: CATEGORY_OPTIONS[0].value,
 };
 
+type UserDataType = {
+  username?: string;
+  profile_picture_url?: string;
+  follows_count?: number;
+  followers_count?: number;
+};
+
+type UserMediaType = {
+  username?: string;
+  profile_picture_url?: string;
+  follows_count?: number;
+  followers_count?: number;
+  media:{
+    data: Array<{
+      id: string;
+      media_url: string;
+      caption?: string;
+      like_count: number;
+      comments_count: number;
+      timestamp: Date;
+      media_type: string;
+    }>
+  }
+};
+
 export function ProductsView() {
   const [sortBy, setSortBy] = useState('featured');
-
   const [openFilter, setOpenFilter] = useState(false);
-
+  const [userData, setUserData] = useState<UserDataType>({});
+  const [userMedia, setUserMedia] = useState<UserMediaType>();
   const [filters, setFilters] = useState<FiltersProps>(defaultFilters);
+
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const [apiData, setApiData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleOpenFilter = useCallback(() => {
     setOpenFilter(true);
@@ -80,14 +109,80 @@ export function ProductsView() {
     setFilters((prevValue) => ({ ...prevValue, ...updateState }));
   }, []);
 
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const handleSearchKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      fetchUserMedia();
+    }
+  };
+
   const canReset = Object.keys(filters).some(
     (key) => filters[key as keyof FiltersProps] !== defaultFilters[key as keyof FiltersProps]
   );
 
+  const fetchUserMedia = async () => {
+    try {
+      setLoading(true);
+      setUserMedia({
+        username: "",
+        profile_picture_url: "",
+        follows_count: 0,
+        followers_count: 0,
+        media: {
+          data: []
+        }
+      });
+      setUserData({})
+      const response = await axios.get(
+        'https://graph.facebook.com/v22.0/17841467514402068',
+        {
+          params: {
+            fields: `business_discovery.username(${searchQuery}){followers_count,media_count,username,website,name,ig_id,profile_picture_url,biography,follows_count}`,
+            access_token: 'EAAMENlyJCeABO8nFBNS8AsV1SGOmlAHoJBAYNwulsLM265CmHDBjZCxQaM8DRqSPIEb6ISPOKL3rm13LtStmSNhMxdZBgnMvZAe1Y18FvhYcRWymN9doSeF9Fhhjf571lqaqgv9GefNlzecTJrfvOyiYmhCKpi7NDEVHzfXhomuYrE0OENJCtNC' // Replace with your actual access token
+          }
+        }
+      );
+      setUserData(response.data.business_discovery);
+      setError(null);
+    } catch (err) {
+      setError(err.message || 'An error occurred');
+      console.error('Error fetching data from Facebook Graph API:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleViewProfile = async () => {
+    console.log('CALLED!');
+    try {
+      setLoading(true);
+      setUserData({});
+      const response = await axios.get(
+        'https://graph.facebook.com/v22.0/17841467514402068',
+        {
+          params: {
+            fields: `business_discovery.username(${searchQuery}){followers_count,media_count,username,website,name,ig_id,profile_picture_url,biography,follows_count,media{id,caption,like_count,comments_count,timestamp,media_product_type,media_type,owner,permalink,media_url,children{media_url}}}`,
+            access_token: 'EAAMENlyJCeABO8nFBNS8AsV1SGOmlAHoJBAYNwulsLM265CmHDBjZCxQaM8DRqSPIEb6ISPOKL3rm13LtStmSNhMxdZBgnMvZAe1Y18FvhYcRWymN9doSeF9Fhhjf571lqaqgv9GefNlzecTJrfvOyiYmhCKpi7NDEVHzfXhomuYrE0OENJCtNC' // Replace with your actual access token
+          }
+        }
+      );
+      setUserMedia(response.data.business_discovery);
+      setError(null);
+    } catch (err) {
+      setError(err.message || 'An error occurred');
+      console.error('Error fetching data from Facebook Graph API:', err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <DashboardContent>
       <Typography variant="h4" sx={{ mb: 5 }}>
-        Products
+        User Search
       </Typography>
 
       <CartIcon totalItems={8} />
@@ -95,28 +190,27 @@ export function ProductsView() {
       <Box
         display="flex"
         alignItems="center"
-        flexWrap="wrap-reverse"
-        justifyContent="flex-end"
+        justifyContent="space-between"
+        flexWrap="wrap"
         sx={{ mb: 5 }}
       >
-        <Box gap={1} display="flex" flexShrink={0} sx={{ my: 1 }}>
-          <ProductFilters
-            canReset={canReset}
-            filters={filters}
-            onSetFilters={handleSetFilters}
-            openFilter={openFilter}
-            onOpenFilter={handleOpenFilter}
-            onCloseFilter={handleCloseFilter}
-            onResetFilter={() => setFilters(defaultFilters)}
-            options={{
-              genders: GENDER_OPTIONS,
-              categories: CATEGORY_OPTIONS,
-              ratings: RATING_OPTIONS,
-              price: PRICE_OPTIONS,
-              colors: COLOR_OPTIONS,
-            }}
-          />
+        <TextField
+          label="Search User"
+          variant="outlined"
+          value={searchQuery}
+          onChange={handleSearchChange}
+          onKeyDown={handleSearchKeyDown}
+          sx={{ width: { xs: "100%", sm: "300px" } }}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            ),
+          }}
+        />
 
+        <Box gap={1} display="flex" flexShrink={0} sx={{ my: 1 }}>
           <ProductSort
             sortBy={sortBy}
             onSort={handleSort}
@@ -130,15 +224,43 @@ export function ProductsView() {
         </Box>
       </Box>
 
+      {loading && <Typography>Loading data...</Typography>}
+      {error && <Typography color="error">Error: {error}</Typography>}
+
       <Grid container spacing={3}>
-        {_products.map((product) => (
-          <Grid key={product.id} xs={12} sm={6} md={3}>
-            <ProductItem product={product} />
+        {userData && Object.keys(userData).length > 0 && (
+          <Grid item xs={12} sm={6} md={3}>
+            <UserItem
+              userData={{
+                username: userData.username || '',
+                profile_picture_url: userData.profile_picture_url || '',
+                follows_count: userData.follows_count || 0,
+                followers_count: userData.followers_count || 0,
+                handleViewProfile: handleViewProfile
+              }}
+            />
           </Grid>
-        ))}
+        )}
+
+        {userMedia && Object.keys(userMedia).length > 0 && (
+          <Grid item xs={12}>
+            <UserMediaItem
+              userData={{
+                business_discovery: {
+                  username: userMedia.username || '',
+                  profile_picture_url: userMedia.profile_picture_url || '',
+                  follows_count: userMedia.follows_count || 0,
+                  followers_count: userMedia.followers_count || 0,
+                  media: userMedia.media
+                }
+              }}
+            />
+          </Grid>
+        )}
+        
       </Grid>
 
-      <Pagination count={10} color="primary" sx={{ mt: 8, mx: 'auto' }} />
+      {/* <Pagination count={10} color="primary" sx={{ mt: 8, mx: 'auto' }} /> */}
     </DashboardContent>
   );
 }

@@ -45,7 +45,7 @@ export function Router() {
       children: [
         { element: <HomePage />, index: true },
         { path: 'user', element: <UserPage /> },
-        { path: 'products', element: <ProductsPage /> },
+        { path: 'user-search', element: <ProductsPage /> },
         { path: 'blog', element: <BlogPage /> },
       ],
     },
