@@ -11,5 +11,5 @@ export type ConfigValue = {
 
 export const CONFIG: ConfigValue = {
   appName: 'Minimal UI',
-  appVersion: packageJson.version,
+  appVersion: 'packageJson.version',
 };

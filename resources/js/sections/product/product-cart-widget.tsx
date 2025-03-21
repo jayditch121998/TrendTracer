@@ -1,13 +1,8 @@
 import type { BoxProps } from '@mui/material/Box';
-
 import Box from '@mui/material/Box';
 import Badge from '@mui/material/Badge';
-
 import { RouterLink } from '../../routes/components';
-
 import { Iconify } from '../../components/iconify';
-
-// ----------------------------------------------------------------------
 
 type Props = BoxProps & {
   totalItems: number;

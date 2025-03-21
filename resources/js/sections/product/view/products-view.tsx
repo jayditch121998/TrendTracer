@@ -1,7 +1,6 @@
-import { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import Pagination from '@mui/material/Pagination';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -166,7 +165,7 @@ export function ProductsView() {
           Accept: 'application/json',
         },
       });
-      
+
       setUserMedia(response.data.business_discovery);
       setError(null);
     } catch (err) {

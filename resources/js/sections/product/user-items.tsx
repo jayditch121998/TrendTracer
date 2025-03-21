@@ -1,13 +1,8 @@
 import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { fCurrency } from '../../utils/format-number';
-import { Label } from '../../components/label';
-import { ColorPreview } from '../../components/color-utils';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import CommentIcon from '@mui/icons-material/Comment';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import Avatar from '@mui/material/Avatar';
 import { Button } from '@mui/material';

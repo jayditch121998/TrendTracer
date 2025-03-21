@@ -1,19 +1,12 @@
 import type { BoxProps } from '@mui/material/Box';
-
 import { forwardRef, useCallback } from 'react';
-
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import ButtonBase from '@mui/material/ButtonBase';
 import { alpha as hexAlpha } from '@mui/material/styles';
-
-import { varAlpha } from '../../theme/styles';
-
 import { Iconify } from '../iconify';
-
+import { varAlpha } from '../../theme/styles';
 import type { ColorPickerProps } from './types';
-
-// ----------------------------------------------------------------------
 
 export const ColorPicker = forwardRef<HTMLDivElement, BoxProps & ColorPickerProps>(
   ({ colors, selected, onSelectColor, limit = 'auto', sx, slotProps, ...other }, ref) => {

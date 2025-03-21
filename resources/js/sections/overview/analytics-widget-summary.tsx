@@ -1,15 +1,11 @@
 import type { CardProps } from '@mui/material/Card';
 import type { ColorType } from '../../theme/core/palette';
 import type { ChartOptions } from '../../components/chart';
-
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import { useTheme } from '@mui/material/styles';
-
 import { fNumber, fPercent, fShortenNumber } from '../../utils/format-number';
-
 import { varAlpha, bgGradient } from '../../theme/styles';
-
 import { Iconify } from '../../components/iconify';
 import { SvgColor } from '../../components/svg-color';
 import { Chart, useChart } from '../../components/chart';
