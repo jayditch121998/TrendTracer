@@ -29,6 +29,12 @@ class CurlHelper
       'Authorization: Bearer ' . ($token ?? config('services.facebook.access_token')) // Use provided token or fallback to .env
     ]);
 
+    // ⚠️ Disable SSL verification in local environment
+    if (app()->environment('local')) {
+      curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    }
+
     // Execute request and capture response
     $response = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
