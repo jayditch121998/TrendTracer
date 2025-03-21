@@ -136,16 +136,7 @@ export function ProductsView() {
         }
       });
       setUserData({})
-      // const response = await axios.get(
-      //   'https://graph.facebook.com/v22.0/17841467514402068',
-      //   {
-      //     params: {
-      //       fields: `business_discovery.username(${searchQuery}){followers_count,media_count,username,website,name,ig_id,profile_picture_url,biography,follows_count}`,
-      //       access_token: 'EAAMENlyJCeABO8nFBNS8AsV1SGOmlAHoJBAYNwulsLM265CmHDBjZCxQaM8DRqSPIEb6ISPOKL3rm13LtStmSNhMxdZBgnMvZAe1Y18FvhYcRWymN9doSeF9Fhhjf571lqaqgv9GefNlzecTJrfvOyiYmhCKpi7NDEVHzfXhomuYrE0OENJCtNC' // Replace with your actual access token
-      //     }
-      //   }
-      // );
-      
+  
       const response = await axios.get('http://127.0.0.1:8000/api/instagram/search/user', {
         params: { username: 'eminem' },
         headers: {

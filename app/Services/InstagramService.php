@@ -47,4 +47,9 @@ class InstagramService
     // Call the CurlHelper with token null to use default
     return CurlHelper::getRequest($this->baseUrl, $queryParams, $accessToken);
   }
+
+  public function searchUserMedias()
+  {
+    
+  }
 }
