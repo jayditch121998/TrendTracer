@@ -48,8 +48,30 @@ class InstagramService
     return CurlHelper::getRequest($this->baseUrl, $queryParams, $accessToken);
   }
 
-  public function searchUserMedias()
+  public function searchUserMedias(string $username)
   {
-    
+    $businessDiscoveryFields = [
+      'followers_count',
+      'media_count',
+      'username',
+      'website',
+      'name',
+      'ig_id',
+      'profile_picture_url',
+      'biography',
+      'follows_count',
+      'media{' . implode(',', $this->mediaFields) . '}'
+    ];
+
+    $fields = 'business_discovery.username(' . $username . '){' . implode(',', $businessDiscoveryFields) . '}';
+
+    $queryParams = [
+      'fields' => $fields
+    ];
+
+    $accessToken = config('meta.instagram.api_token');
+
+    // Call the CurlHelper with token null to use default
+    return CurlHelper::getRequest($this->baseUrl, $queryParams, $accessToken);
   }
 }

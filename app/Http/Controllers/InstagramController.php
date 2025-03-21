@@ -15,10 +15,10 @@ class InstagramController extends Controller
     });
   }
 
-  public function handleSearchUserMedias()
+  public function handleSearchUserMedias(SearchUserRequest $request)
   {
-    return $this->executeAction(function () {
-      return (new InstagramService)->searchUserMedias();
+    return $this->executeAction(function () use($request) {
+      return (new InstagramService)->searchUserMedias($request->username);
     });
   }
 }

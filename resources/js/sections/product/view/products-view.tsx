@@ -142,9 +142,8 @@ export function ProductsView() {
         headers: {
           Accept: 'application/json',
         },
-        // withCredentials: true, // Optional: if your Laravel app uses cookies/sessions
       });
-      console.log(response);
+
       setUserData(response.data.business_discovery);
       setError(null);
     } catch (err) {
@@ -160,15 +159,14 @@ export function ProductsView() {
     try {
       setLoading(true);
       setUserData({});
-      const response = await axios.get(
-        'https://graph.facebook.com/v22.0/17841467514402068',
-        {
-          params: {
-            fields: `business_discovery.username(${searchQuery}){followers_count,media_count,username,website,name,ig_id,profile_picture_url,biography,follows_count,media{id,caption,like_count,comments_count,timestamp,media_product_type,media_type,owner,permalink,media_url,children{media_url}}}`,
-            access_token: 'EAAMENlyJCeABO8nFBNS8AsV1SGOmlAHoJBAYNwulsLM265CmHDBjZCxQaM8DRqSPIEb6ISPOKL3rm13LtStmSNhMxdZBgnMvZAe1Y18FvhYcRWymN9doSeF9Fhhjf571lqaqgv9GefNlzecTJrfvOyiYmhCKpi7NDEVHzfXhomuYrE0OENJCtNC' // Replace with your actual access token
-          }
-        }
-      );
+
+      const response = await axios.get('http://127.0.0.1:8000/api/instagram/search/user/medias', {
+        params: { username: 'eminem' },
+        headers: {
+          Accept: 'application/json',
+        },
+      });
+      
       setUserMedia(response.data.business_discovery);
       setError(null);
     } catch (err) {

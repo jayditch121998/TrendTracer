@@ -14,6 +14,7 @@ Route::post('test', function () {
 
 Route::controller(InstagramController::class)->prefix('/instagram')->group(function() {
   Route::get('/search/user', 'handleSearchUser');
+  Route::get('/search/user/medias', 'handleSearchUserMedias');
 });
 
 Route::prefix('auth')->group(function () {
