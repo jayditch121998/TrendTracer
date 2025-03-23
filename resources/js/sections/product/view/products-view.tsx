@@ -136,7 +136,7 @@ export function ProductsView() {
       });
       setUserData({})
   
-      const response = await axios.get('http://127.0.0.1:8000/api/instagram/search/user', {
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/instagram/search/user`, {
         params: { username: 'eminem' },
         headers: {
           Accept: 'application/json',
@@ -159,7 +159,7 @@ export function ProductsView() {
       setLoading(true);
       setUserData({});
 
-      const response = await axios.get('http://127.0.0.1:8000/api/instagram/search/user/medias', {
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/instagram/search/user/medias`, {
         params: { username: 'eminem' },
         headers: {
           Accept: 'application/json',
