@@ -1,23 +1,16 @@
 import { lazy, Suspense } from 'react';
 import { Outlet, Navigate, useRoutes } from 'react-router-dom';
-
 import Box from '@mui/material/Box';
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
-
 import { varAlpha } from '../theme/styles';
 import { AuthLayout } from '../layouts/auth';
 import { DashboardLayout } from '../layouts/dashboard';
-
-// ----------------------------------------------------------------------
-
 export const HomePage = lazy(() => import('../pages/home'));
 export const BlogPage = lazy(() => import('../pages/blog'));
 export const UserPage = lazy(() => import('../pages/user'));
 export const SignInPage = lazy(() => import('../pages/sign-in'));
-export const ProductsPage = lazy(() => import('../pages/products'));
+export const UserSearchPage = lazy(() => import('../pages/user-search'));
 export const Page404 = lazy(() => import('../pages/page-not-found'));
-
-// ----------------------------------------------------------------------
 
 const renderFallback = (
   <Box display="flex" alignItems="center" justifyContent="center" flex="1 1 auto">
@@ -45,7 +38,7 @@ export function Router() {
       children: [
         { element: <HomePage />, index: true },
         { path: 'user', element: <UserPage /> },
-        { path: 'user-search', element: <ProductsPage /> },
+        { path: 'user-search', element: <UserSearchPage /> },
         { path: 'blog', element: <BlogPage /> },
       ],
     },

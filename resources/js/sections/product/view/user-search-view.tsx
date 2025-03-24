@@ -97,10 +97,6 @@ export function ProductsView() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const handleOpenFilter = useCallback(() => {
-    setOpenFilter(true);
-  }, []);
-
   const handleCloseFilter = useCallback(() => {
     setOpenFilter(false);
   }, []);
@@ -142,7 +138,7 @@ export function ProductsView() {
       setUserData({})
   
       const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/instagram/search/user`, {
-        params: { username: 'eminem' },
+        params: { username: searchQuery },
         headers: {
           Accept: 'application/json',
         },
@@ -165,7 +161,7 @@ export function ProductsView() {
       setUserData({});
 
       const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/instagram/search/user/medias`, {
-        params: { username: 'eminem' },
+        params: { username: searchQuery },
         headers: {
           Accept: 'application/json',
         },
