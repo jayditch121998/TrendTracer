@@ -79,8 +79,13 @@ type UserMediaType = {
   }
 };
 
+const sortOptions = [
+  { value: 'likesDesc', label: 'Most Likes' },
+  { value: 'likesAsc', label: 'Least Likes' },
+];
+
 export function ProductsView() {
-  const [sortBy, setSortBy] = useState('featured');
+  const [sortBy, setSortBy] = useState('likesDesc');
   const [openFilter, setOpenFilter] = useState(false);
   const [userData, setUserData] = useState<UserDataType>({});
   const [userMedia, setUserMedia] = useState<UserMediaType>();
@@ -211,12 +216,7 @@ export function ProductsView() {
           <ProductSort
             sortBy={sortBy}
             onSort={handleSort}
-            options={[
-              { value: 'featured', label: 'Featured' },
-              { value: 'newest', label: 'Newest' },
-              { value: 'priceDesc', label: 'Price: High-Low' },
-              { value: 'priceAsc', label: 'Price: Low-High' },
-            ]}
+            options={sortOptions}
           />
         </Box>
       </Box>
@@ -251,6 +251,7 @@ export function ProductsView() {
                   media: userMedia.media
                 }
               }}
+              sortBy={sortBy}
             />
           </Grid>
         )}
