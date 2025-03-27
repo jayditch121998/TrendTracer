@@ -1,1 +1,1 @@
-export * from './products-view';
+export * from './user-search-view';

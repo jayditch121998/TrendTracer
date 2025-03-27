@@ -34,12 +34,24 @@ const formatNumber = (num: number): string => {
   return num.toLocaleString(); // Adds commas (e.g., 1,234)
 };
 
-export function UserMediaItem({ userData }: { userData: UserMediaItemProps }) {
+export function UserMediaItem({ userData, sortBy }: { userData: UserMediaItemProps, sortBy: string }) {
+  const sortMedia = (data: any[]) => {
+    return [...data].sort((a, b) => {
+      switch (sortBy) {
+        case 'likesDesc':
+          return b.like_count - a.like_count;
+        case 'likesAsc':
+          return a.like_count - b.like_count;
+        default:
+          return b.like_count - a.like_count;
+      }
+    });
+  };
+
   return (
     <Grid container spacing={2}>
       {userData.business_discovery.media?.data?.length ? (
-        [...userData.business_discovery.media.data] // ✅ Clone array to avoid mutating original data
-          .sort((a, b) => b.like_count - a.like_count) // ✅ Sort by likes (DESC)
+        sortMedia(userData.business_discovery.media.data)
           .map((mediaItem) => (
             mediaItem.media_type === 'VIDEO' && (
               <Grid item xs={12} sm={6} md={4} lg={3} key={mediaItem.id}>
