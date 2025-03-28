@@ -10,7 +10,7 @@ export default defineConfig({
     plugins: [
         laravel({
             input: ["resources/js/global.css", "resources/js/main.tsx"],
-            refresh: true,
+            refresh: process.env.APP_ENV !== 'production',
         }),
         react(),
         checker({

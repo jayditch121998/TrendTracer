@@ -30,8 +30,6 @@ const formatNumber = (num: number): string => {
   return num.toString();
 };
 
-
-
 export function UserReelsView() {
   const [sortBy, setSortBy] = useState('likesDesc');
   const [searchQuery, setSearchQuery] = useState('');
@@ -80,7 +78,7 @@ export function UserReelsView() {
       const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/instagram/search/user`, {
         params: { 
           username: searchQuery,
-          limit: 3
+          limit: 10
         },
         headers: {
           Accept: 'application/json',
@@ -143,6 +141,7 @@ export function UserReelsView() {
       >
         <TextField
           label="Search User"
+          disabled={loading || fetchingReels}
           variant="outlined"
           value={searchQuery}
           onChange={handleSearchChange}
