@@ -22,6 +22,22 @@ class ApifyService
   {
     $url = "https://api.apify.com/v2/datasets/$datasetId/items?token=". env('APIFY_TOKEN');
     
-    return ApifyCurlHelper::getDataset($url);
+    $response = ApifyCurlHelper::getDataset($url);
+
+    $filtered = collect($response)->map(function ($item) {
+      return [
+        'id' => $item['id'],
+        'user_url' => $item['inputUrl'],
+        'caption' => $item['caption'],
+        'post_url' => $item['url'],
+        'likes' => $item['likesCount'],
+        'comments_count' => $item['commentsCount'],
+        'video_url' => $item['videoUrl'],
+        'views_view_count' => $item['videoViewCount'],
+        'video_play_count' => $item['videoPlayCount'],
+      ];
+    });
+
+    return $filtered;
   }
 }

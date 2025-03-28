@@ -5,11 +5,13 @@ import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgr
 import { varAlpha } from '../theme/styles';
 import { AuthLayout } from '../layouts/auth';
 import { DashboardLayout } from '../layouts/dashboard';
+
 export const HomePage = lazy(() => import('../pages/home'));
 export const BlogPage = lazy(() => import('../pages/blog'));
 export const UserPage = lazy(() => import('../pages/user'));
 export const SignInPage = lazy(() => import('../pages/sign-in'));
 export const UserSearchPage = lazy(() => import('../pages/user-search'));
+export const UserReelsPage = lazy(() => import('../pages/user-reels'));
 export const Page404 = lazy(() => import('../pages/page-not-found'));
 
 const renderFallback = (
@@ -40,6 +42,7 @@ export function Router() {
         { path: 'user', element: <UserPage /> },
         { path: 'user-search', element: <UserSearchPage /> },
         { path: 'blog', element: <BlogPage /> },
+        { path: 'user-reels', element: <UserReelsPage /> },
       ],
     },
     {

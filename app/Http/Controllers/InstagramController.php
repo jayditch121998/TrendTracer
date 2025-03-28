@@ -11,7 +11,7 @@ class InstagramController extends Controller
   public function handleSearchUser(SearchUserRequest $request)
   {
     return $this->executeAction(function () use ($request) {
-      return (new InstagramService)->searchUserInstagram($request->username);
+      return (new InstagramService)->searchUserInstagram($request->username, $request->limit);
     });
   }
 

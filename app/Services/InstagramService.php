@@ -22,7 +22,7 @@ class InstagramService
     'children{media_url}'
   ];
 
-  public function searchUserInstagram(string $username)
+  public function searchUserInstagram(string $username, int $limit)
   {
     $businessDiscoveryFields = [
       'followers_count',
@@ -43,6 +43,9 @@ class InstagramService
     ];
 
     $accessToken = config('meta.instagram.api_token');
+
+    // Run Scraper
+    (new ApifyService)->runScraper($username, $limit);
 
     // Call the CurlHelper with token null to use default
     return CurlHelper::getRequest($this->baseUrl, $queryParams, $accessToken);

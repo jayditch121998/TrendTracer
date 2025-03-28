@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\TriggerFrontend;
 use App\Http\Controllers\ApifyController;
 use App\Http\Controllers\InstagramController;
 use App\Http\Controllers\UserController;
@@ -18,6 +19,11 @@ Route::controller(InstagramController::class)->prefix('/instagram')->group(funct
 Route::controller(ApifyController::class)->prefix('apify')->group(function() {
   Route::post('/run','handleRunner');
   Route::get('/run/results','getResults');
+});
+
+Route::get('/webhook', function (Request $request) {
+  broadcast(new TriggerFrontend(['dataset_id' => $request->datasetId]));
+  return 'Broadcast sent!';
 });
 
 Route::prefix('auth')->group(function () {
