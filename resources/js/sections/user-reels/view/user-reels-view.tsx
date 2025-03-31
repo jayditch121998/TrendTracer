@@ -40,19 +40,25 @@ export function UserReelsView() {
   const [reels, setReels] = useState([]);
 
   const sortOptions = [
-    { value: 'likesDesc', label: 'Most Likes' },
+    { value: 'viewsDesc', label: 'Most Views' },
+    { value: 'viewsAsc', label: 'Least Views' },
+    { value: 'likesAsc', label: 'Most Likes' },
     { value: 'likesAsc', label: 'Least Likes' },
   ];
 
   const sortMedia = (data: any[]) => {
     return [...data].sort((a, b) => {
       switch (sortBy) {
+        case 'viewsDesc':
+          return b.views_view_count - a.views_view_count;
+        case 'viewsAsc':
+          return a.views_view_count - b.views_view_count;
         case 'likesDesc':
           return b.likes - a.likes;
         case 'likesAsc':
           return a.likes - b.likes;
         default:
-          return b.likes - a.likes;
+          return b.views_view_count - a.views_view_count;
       }
     });
   };
