@@ -84,7 +84,7 @@ export function UserReelsView() {
       const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/instagram/search/user`, {
         params: { 
           username: searchQuery,
-          limit: 2
+          limit: 10
         },
         headers: {
           Accept: 'application/json',
