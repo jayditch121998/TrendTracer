@@ -31,7 +31,7 @@ const formatNumber = (num: number): string => {
 };
 
 export function UserReelsView() {
-  const [sortBy, setSortBy] = useState('likesDesc');
+  const [sortBy, setSortBy] = useState('viewsDesc');
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(false);
   const [fetchingReels, setFetchingReels] = useState(false);
@@ -42,7 +42,7 @@ export function UserReelsView() {
   const sortOptions = [
     { value: 'viewsDesc', label: 'Most Views' },
     { value: 'viewsAsc', label: 'Least Views' },
-    { value: 'likesAsc', label: 'Most Likes' },
+    { value: 'likesDesc', label: 'Most Likes' },
     { value: 'likesAsc', label: 'Least Likes' },
   ];
 
@@ -84,7 +84,7 @@ export function UserReelsView() {
       const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/instagram/search/user`, {
         params: { 
           username: searchQuery,
-          limit: 10
+          limit: 2
         },
         headers: {
           Accept: 'application/json',
