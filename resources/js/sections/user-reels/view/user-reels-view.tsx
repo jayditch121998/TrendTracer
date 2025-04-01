@@ -33,11 +33,13 @@ const formatNumber = (num: number): string => {
 export function UserReelsView() {
   const [sortBy, setSortBy] = useState('viewsDesc');
   const [searchQuery, setSearchQuery] = useState('');
+  const [username, setUsername] = useState('');
   const [loading, setLoading] = useState(false);
   const [fetchingReels, setFetchingReels] = useState(false);
   const [error, setError] = useState(null);
   const [userData, setUserData] = useState<UserDataType>({});
   const [reels, setReels] = useState([]);
+  const [searchMessage, setSearchMessage] = useState('');
 
   const sortOptions = [
     { value: 'viewsDesc', label: 'Most Views' },
@@ -69,21 +71,34 @@ export function UserReelsView() {
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
+
+    let input = event.target.value.trim();
+    // Check if input is an Instagram URL
+    const urlPattern = /(?:https?:\/\/)?(?:www\.)?instagram\.com\/([a-zA-Z0-9_.]+)/;
+    const match = input.match(urlPattern);
+   
+    if (match) {
+      input = match[1]; // Extract the username from the URL
+    }
+    setUsername(input);
   };
   
   const handleSearchKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
+      setUserData({})
+      setReels([]);
       fetchUserMedia();
     }
   };
 
   const fetchUserMedia = async () => {
+    setSearchMessage(`Searching for User @${username}`);
+    setLoading(true);
+    setError(null);
     try {
-      setLoading(true);
-      setUserData({})
       const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/instagram/search/user`, {
         params: { 
-          username: searchQuery,
+          username: username,
           limit: 10
         },
         headers: {
@@ -92,13 +107,13 @@ export function UserReelsView() {
       });
 
       setUserData(response.data.business_discovery);
-      setError(null);
-    } catch (err) {
-      setError(err.message || 'An error occurred');
-      console.error('Error fetching data from Facebook Graph API:', err);
-    } finally {
       setLoading(false);
       setFetchingReels(true);
+      setSearchMessage(`Fetching reels for @${username}`);
+    } catch (err) {
+      setError(err.response.data.message || 'An error occurred');
+      console.error('Error fetching data from Facebook Graph API:', err);
+      setLoading(false);
     }
   };
 
@@ -118,6 +133,7 @@ export function UserReelsView() {
       console.error('Error fetching data from Facebook Graph API:', err);
     } finally {
       setFetchingReels(false);
+      setSearchMessage('');
     }
   };
 
@@ -152,7 +168,9 @@ export function UserReelsView() {
           value={searchQuery}
           onChange={handleSearchChange}
           onKeyDown={handleSearchKeyDown}
-          sx={{ width: { xs: "100%", sm: "300px" } }}
+          sx={{ width: { xs: "100%", sm: "50%" } }}
+          error={error} // MUI shows red border if error exists
+          helperText={error} // Shows error message below input
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -167,6 +185,7 @@ export function UserReelsView() {
             sortBy={sortBy}
             onSort={handleSort}
             options={sortOptions}
+            disabled={loading || fetchingReels}
           />
         </Box>
       </Box>
@@ -175,6 +194,9 @@ export function UserReelsView() {
         {loading && (
           <Grid item xs={12}>
             <LinearProgress />
+            <Typography variant="body2" mt={1} color="textSecondary">
+                {searchMessage}
+              </Typography>
           </Grid>
         )}
         {
@@ -226,7 +248,7 @@ export function UserReelsView() {
             >
               <LinearProgress sx={{ width: '100%' }} />
               <Typography variant="body2" mt={1} color="textSecondary">
-                Fetching reels...
+                {searchMessage}
               </Typography>
             </Box>
           </Grid>
@@ -242,7 +264,7 @@ export function UserReelsView() {
                     Your browser does not support the video tag.
                   </video>
                 </CardMedia>
-                <CardContent sx={{height: '90px'}}>
+                <CardContent sx={{minHeight: '90px'}}>
                   <Typography variant="body2" color="text.secondary">
                     {mediaItem.caption &&
                       mediaItem.caption.slice(0, 150) +

@@ -16,9 +16,10 @@ type VideoSortProps = ButtonProps & {
   sortBy: string;
   onSort: (newSort: string) => void;
   options: { value: string; label: string }[];
+  disabled: boolean;
 };
 
-export function VideoSort({ options, sortBy, onSort, sx, ...other }: VideoSortProps) {
+export function VideoSort({ options, sortBy, onSort, sx, disabled, ...other }: VideoSortProps) {
   const [openPopover, setOpenPopover] = useState<HTMLButtonElement | null>(null);
 
   const handleOpenPopover = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
@@ -36,6 +37,7 @@ export function VideoSort({ options, sortBy, onSort, sx, ...other }: VideoSortPr
         color="inherit"
         onClick={handleOpenPopover}
         endIcon={<Iconify icon={openPopover ? 'eva:chevron-up-fill' : 'eva:chevron-down-fill'} />}
+        disabled
         sx={sx}
         {...other}
       >

@@ -41,14 +41,16 @@ class InstagramService
     $queryParams = [
       'fields' => $fields
     ];
-
     $accessToken = config('meta.instagram.api_token');
 
+    
+    // Call the CurlHelper with token null to use default
+    $response = CurlHelper::getRequest($this->baseUrl, $queryParams, $accessToken);
+    
     // Run Scraper
     (new ApifyService)->runScraper($username, $limit);
 
-    // Call the CurlHelper with token null to use default
-    return CurlHelper::getRequest($this->baseUrl, $queryParams, $accessToken);
+    return $response;
   }
 
   public function searchUserMedias(string $username)

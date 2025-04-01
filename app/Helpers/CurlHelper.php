@@ -39,15 +39,16 @@ class CurlHelper
     $response = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     $error = curl_error($ch);
-
+    if($httpCode !== 200) {
+      throw new \Exception("Username does not exist", 400);
+    }
     // Close cURL
     curl_close($ch);
 
     // Handle errors
     if ($response === false) {
-      return ['error' => 'cURL Error: ' . $error];
+      throw new \Exception("Username does not exist", 400);
     }
-
     // Decode and return JSON response
     return json_decode($response, true);
   }
