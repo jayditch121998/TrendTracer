@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
   )
   ->withMiddleware(function (Middleware $middleware) {
     $middleware->append(EnsureFrontendRequestsAreStateful::class);
+    $middleware->statefulApi();
   })
   ->withExceptions(function (Exceptions $exceptions) {
     //

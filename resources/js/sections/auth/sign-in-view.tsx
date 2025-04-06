@@ -12,25 +12,50 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { useRouter } from '../../routes/hooks';
 
 import { Iconify } from '../../components/iconify';
-
-// ----------------------------------------------------------------------
+import { login } from '../../api/auth';
 
 export function SignInView() {
   const router = useRouter();
 
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const handleSignIn = useCallback(() => {
-    router.push('/');
-  }, [router]);
+  // const handleSignIn = useCallback(() => {
+  //   router.push('/');
+  // }, [router]);
 
-  const renderForm = (
-    <Box display="flex" flexDirection="column" alignItems="flex-end">
+  const handleSignIn = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      await login(email, password);
+      router.push('/');
+    } catch (err) {
+      console.error('Invalid Credentials');
+    }
+  }
+
+  return (
+    <>
+      <Box gap={1.5} display="flex" flexDirection="column" alignItems="center" sx={{ mb: 5 }}>
+        <Typography variant="h5">Sign in</Typography>
+        <Typography variant="body2" color="text.secondary">
+          Don’t have an account?
+          <Link variant="subtitle2" sx={{ ml: 0.5 }}>
+            Get started
+          </Link>
+        </Typography>
+      </Box>
+
+      <Box display="flex" flexDirection="column" alignItems="flex-end">
       <TextField
         fullWidth
         name="email"
         label="Email address"
-        defaultValue="hello@gmail.com"
+        value={email}
+        placeholder='Email Address'
+        onChange={(e) => setEmail(e.target.value)}
         InputLabelProps={{ shrink: true }}
         sx={{ mb: 3 }}
       />
@@ -43,9 +68,10 @@ export function SignInView() {
         fullWidth
         name="password"
         label="Password"
-        defaultValue="@demo1234"
+        value={password}
         InputLabelProps={{ shrink: true }}
         type={showPassword ? 'text' : 'password'}
+        onChange={(e) => setPassword(e.target.value)}
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
@@ -69,21 +95,6 @@ export function SignInView() {
         Sign in
       </LoadingButton>
     </Box>
-  );
-
-  return (
-    <>
-      <Box gap={1.5} display="flex" flexDirection="column" alignItems="center" sx={{ mb: 5 }}>
-        <Typography variant="h5">Sign in</Typography>
-        <Typography variant="body2" color="text.secondary">
-          Don’t have an account?
-          <Link variant="subtitle2" sx={{ ml: 0.5 }}>
-            Get started
-          </Link>
-        </Typography>
-      </Box>
-
-      {renderForm}
 
       <Divider sx={{ my: 3, '&::before, &::after': { borderTopStyle: 'dashed' } }}>
         <Typography
