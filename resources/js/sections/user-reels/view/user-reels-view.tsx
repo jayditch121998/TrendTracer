@@ -90,7 +90,9 @@ export function UserReelsView() {
       fetchUserMedia();
     }
   };
-
+  async function () {
+    
+  }
   const fetchUserMedia = async () => {
     setSearchMessage(`Searching for User @${username}`);
     setLoading(true);

@@ -8,14 +8,17 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
 import InputAdornment from '@mui/material/InputAdornment';
-
+import { useAuth } from '../../context/AuthContext'
 import { useRouter } from '../../routes/hooks';
 
 import { Iconify } from '../../components/iconify';
 import { login } from '../../api/auth';
+import { Navigate } from 'react-router-dom';
+import axiosClient from '../../utils/axios';
 
 export function SignInView() {
   const router = useRouter();
+  const { user } = useAuth();
 
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
@@ -25,11 +28,18 @@ export function SignInView() {
   //   router.push('/');
   // }, [router]);
 
+  if (user) {
+    return <Navigate to="/" replace />
+  }
+
+  
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
       await login(email, password);
+      const response = await axiosClient.get('/api/user', { withCredentials: true }); 
+      console.log('dwadwada: ', response);
       router.push('/');
     } catch (err) {
       console.error('Invalid Credentials');

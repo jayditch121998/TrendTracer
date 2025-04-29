@@ -5,6 +5,7 @@ import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgr
 import { varAlpha } from '../theme/styles';
 import { AuthLayout } from '../layouts/auth';
 import { DashboardLayout } from '../layouts/dashboard';
+import ProtectedRoute from '../components/ProtectedRoute';
 
 export const HomePage = lazy(() => import('../pages/home'));
 export const BlogPage = lazy(() => import('../pages/blog'));
@@ -31,11 +32,14 @@ export function Router() {
   return useRoutes([
     {
       element: (
-        <DashboardLayout>
-          <Suspense fallback={renderFallback}>
-            <Outlet />
-          </Suspense>
-        </DashboardLayout>
+        <ProtectedRoute>
+          <DashboardLayout>
+            <Suspense fallback={renderFallback}>
+              <Outlet />
+            </Suspense>
+          </DashboardLayout>
+
+        </ProtectedRoute>
       ),
       children: [
         { element: <HomePage />, index: true },

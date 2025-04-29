@@ -14,22 +14,22 @@ export const navData = [
     title: 'Search User Reels',
     path: 'user-reels',
     icon: icon('ic-search')
-  }
-  // {
-  //   title: 'User',
-  //   path: '/user',
-  //   icon: icon('ic-user'),
-  // },
+  },
+  {
+    title: 'User',
+    path: '/user',
+    icon: icon('ic-user'),
+  },
   // {
   //   title: 'Search User',
   //   path: '/user-search',
   //   icon: icon('ic-user'),
   // },
-  // {
-  //   title: 'Blog',
-  //   path: '/blog',
-  //   icon: icon('ic-blog'),
-  // },
+  {
+    title: 'Blog',
+    path: '/blog',
+    icon: icon('ic-blog'),
+  },
   // {
   //   title: 'Sign in',
   //   path: '/sign-in',

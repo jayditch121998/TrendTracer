@@ -40,4 +40,37 @@ class ApifyService
 
     return $filtered;
   }
+  public function runScraper($username, $accessToken)
+  {
+    // $baseUrl = "https://api.apify.com/v2/acts/xMc5Ga1oCONPmWJIa/runs?token=apify_api_itb9SRus81ofAen1bIQ5JR9yfIgBtC1buE35";
+    $baseUrl = 'https://api.apify.com/v2/acts/xMc5Ga1oCONPmWJIa/run-sync-get-dataset-items?token=' . $accessToken;
+    $params = [
+      "username" => [
+        $username
+      ],
+      "resultsLimit" => 4
+    ];
+
+    $body = wp_json_encode($params);
+
+    $args = [
+      'method'    => 'POST',
+      'headers'   => [
+        'Content-Type' => 'application/json',
+      ],
+      'body'      => $body,
+      'timeout'   => 30,
+      'sslverify' => !(defined('WP_ENV') && WP_ENV === 'local'),
+    ];
+  
+    $response = wp_remote_post($baseUrl, $args);
+  
+    if (is_wp_error($response)) {
+      return ['error' => $response->get_error_message()];
+    }
+  
+    // $body = wp_remote_retrieve_body($response);
+    // return $decode ? json_decode($body, true) : $body;
+
+  }
 }
