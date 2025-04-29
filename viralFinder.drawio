@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36" version="26.2.12">
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36" version="26.2.14">
   <diagram name="Page-1" id="h61SVVntLW2SpJuhT1aK">
-    <mxGraphModel dx="2197" dy="1143" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2000" pageHeight="2000" math="0" shadow="0">
+    <mxGraphModel dx="1426" dy="761" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2000" pageHeight="2000" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -109,7 +109,7 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="BrmdzVbv70yO6n5Es6os-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Ycl4GxUiq36-YD5LlwCj-9" target="BrmdzVbv70yO6n5Es6os-2">
+        <mxCell id="BrmdzVbv70yO6n5Es6os-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="Ycl4GxUiq36-YD5LlwCj-9" target="BrmdzVbv70yO6n5Es6os-2" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="Ycl4GxUiq36-YD5LlwCj-9" value="has duplicates" style="rhombus;whiteSpace=wrap;html=1;" parent="1" vertex="1">
@@ -121,8 +121,14 @@
         <mxCell id="Ycl4GxUiq36-YD5LlwCj-14" value="Save dataset to DB" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="840" y="980" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="BrmdzVbv70yO6n5Es6os-2" value="" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="QRAZltIY2AsecKisff2K-2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="BrmdzVbv70yO6n5Es6os-2" target="QRAZltIY2AsecKisff2K-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BrmdzVbv70yO6n5Es6os-2" value="Transcribe Video to Text using whisper" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="840" y="1090" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="QRAZltIY2AsecKisff2K-1" value="Save Text to Video&#39;s data" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="1090" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
