@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36" version="26.2.14">
   <diagram name="Page-1" id="h61SVVntLW2SpJuhT1aK">
-    <mxGraphModel dx="1426" dy="761" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2000" pageHeight="2000" math="0" shadow="0">
+    <mxGraphModel dx="2852" dy="1486" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="5000" pageHeight="2000" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -121,14 +121,59 @@
         <mxCell id="Ycl4GxUiq36-YD5LlwCj-14" value="Save dataset to DB" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="840" y="980" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="QRAZltIY2AsecKisff2K-2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="BrmdzVbv70yO6n5Es6os-2" target="QRAZltIY2AsecKisff2K-1">
+        <mxCell id="QRAZltIY2AsecKisff2K-2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="BrmdzVbv70yO6n5Es6os-2" target="QRAZltIY2AsecKisff2K-1" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="BrmdzVbv70yO6n5Es6os-2" value="Transcribe Video to Text using whisper" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="840" y="1090" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="QRAZltIY2AsecKisff2K-1" value="Save Text to Video&#39;s data" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="QRAZltIY2AsecKisff2K-1" value="Save Text to Video&#39;s data" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="1040" y="1090" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="o0v9pR_ql7v2SHRatpIa-1" value="&lt;font style=&quot;font-size: 30px;&quot;&gt;Meedro - viral finder&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1910" y="180" width="270" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="o0v9pR_ql7v2SHRatpIa-2" value="&lt;font style=&quot;font-size: 30px;&quot;&gt;Laravel (REST API)&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="2770" y="180" width="270" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="o0v9pR_ql7v2SHRatpIa-3" value="" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/app_services/Search_Services.svg;" vertex="1" parent="1">
+          <mxGeometry x="2000.01" y="350" width="90" height="65.01" as="geometry" />
+        </mxCell>
+        <mxCell id="o0v9pR_ql7v2SHRatpIa-4" value="" style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;spacingTop=3;image=img/lib/active_directory/database.svg;" vertex="1" parent="1">
+          <mxGeometry x="2870" y="596" width="87.84" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="o0v9pR_ql7v2SHRatpIa-5" value="" style="endArrow=classic;html=1;rounded=0;flowAnimation=1;strokeWidth=5;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="2124" y="714" as="sourcePoint" />
+            <mxPoint x="2740" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o0v9pR_ql7v2SHRatpIa-6" value="Search username / url" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="1930" y="290" width="210" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="o0v9pR_ql7v2SHRatpIa-7" value="" style="aspect=fixed;sketch=0;html=1;dashed=0;whitespace=wrap;verticalLabelPosition=bottom;verticalAlign=top;fillColor=#2875E2;strokeColor=#ffffff;points=[[0.005,0.63,0],[0.1,0.2,0],[0.9,0.2,0],[0.5,0,0],[0.995,0.63,0],[0.72,0.99,0],[0.5,1,0],[0.28,0.99,0]];shape=mxgraph.kubernetes.icon2;kubernetesLabel=1;prIcon=api" vertex="1" parent="1">
+          <mxGeometry x="2000" y="515" width="90" height="86.4" as="geometry" />
+        </mxCell>
+        <mxCell id="o0v9pR_ql7v2SHRatpIa-8" value="" style="endArrow=classic;html=1;rounded=0;flowAnimation=1;strokeWidth=5;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="2044.42" y="431" as="sourcePoint" />
+            <mxPoint x="2044.42" y="482" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o0v9pR_ql7v2SHRatpIa-9" value="Call apify API to scrape" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="1930" y="490" width="210" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="o0v9pR_ql7v2SHRatpIa-10" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Results /&amp;nbsp;&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;metadata&lt;/font&gt;&lt;/div&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="1981" y="672" width="128" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="o0v9pR_ql7v2SHRatpIa-11" value="" style="endArrow=classic;html=1;rounded=0;flowAnimation=1;strokeWidth=5;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="2047" y="611" as="sourcePoint" />
+            <mxPoint x="2047" y="666" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o0v9pR_ql7v2SHRatpIa-12" value="" style="sketch=0;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#434445;aspect=fixed;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;shape=mxgraph.vvd.business_continuity_data_protection;" vertex="1" parent="1">
+          <mxGeometry x="2845.11" y="322" width="119.77" height="103" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
